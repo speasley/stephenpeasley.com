@@ -553,8 +553,8 @@ a { color: inherit; }
   border-radius: 50%;
 }
 .egg__brain svg {
-  width: 2.75rem;
-  height: 2.75rem;
+  width: 2rem;
+  height: 2rem;
   fill: var(--line);
   transition: fill 0.3s ease;
 }
@@ -573,13 +573,13 @@ a { color: inherit; }
 }
 .egg__info--status {
   right: 50%;
-  margin-right: 2.4rem;
+  margin-right: 2rem;
   text-align: right;
   transform: translate(0.5rem, -50%);
 }
 .egg__info--mri {
   left: 50%;
-  margin-left: 2.4rem;
+  margin-left: 2rem;
   text-align: left;
   transform: translate(-0.5rem, -50%);
 }
