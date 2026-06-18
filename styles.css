@@ -517,8 +517,13 @@ a { color: inherit; }
 .footer {
   max-width: var(--maxw);
   margin: 0 auto;
-  padding: 2rem var(--pad) 3rem;
+  padding: 2.5rem var(--pad) 3rem;
   border-top: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+.footer__row {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -527,9 +532,78 @@ a { color: inherit; }
   letter-spacing: 0.04em;
   color: var(--faint);
 }
-.footer span, .footer__top { white-space: nowrap; }
+.footer__row span, .footer__top { white-space: nowrap; }
 .footer__top { color: var(--muted); text-decoration: none; transition: color 0.2s ease; }
 .footer__top:hover { color: var(--accent); }
+
+/* --- Brain: a quiet end-of-page note. Click or Enter to unfold the dates. --- */
+.footer__egg {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3rem;
+}
+.egg__brain {
+  border: 0;
+  background: none;
+  padding: 0.25rem;
+  cursor: pointer;
+  line-height: 0;
+  border-radius: 50%;
+}
+.egg__brain svg {
+  width: 2.75rem;
+  height: 2.75rem;
+  fill: var(--line);
+  transition: fill 0.3s ease;
+}
+.egg__brain:hover svg,
+.egg__brain[aria-expanded="true"] svg { fill: var(--accent); }
+
+.egg__info {
+  position: absolute;
+  top: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.45s ease, transform 0.45s ease;
+}
+.egg__info--status {
+  right: 50%;
+  margin-right: 2.4rem;
+  text-align: right;
+  transform: translate(0.5rem, -50%);
+}
+.egg__info--mri {
+  left: 50%;
+  margin-left: 2.4rem;
+  text-align: left;
+  transform: translate(-0.5rem, -50%);
+}
+.footer__egg.is-open .egg__info { opacity: 1; transform: translate(0, -50%); }
+
+.egg__heading {
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+.egg__value {
+  font-family: var(--serif);
+  font-size: 1.25rem;
+  line-height: 1;
+  color: var(--ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .egg__brain svg { transition: none; }
+  .egg__info { transition: opacity 0.2s ease; }
+  .egg__info--status, .egg__info--mri { transform: translate(0, -50%); }
+}
 
 /* ===========================================================================
    REVEAL — one-time gentle fade-up on load. Gated on html.js.
