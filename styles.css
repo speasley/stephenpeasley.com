@@ -1,0 +1,574 @@
+/* ===========================================================================
+   STEPHEN PEASLEY — LEARNING STRATEGY & TECHNOLOGY  ·  styles.css
+   =========================================================================== */
+
+:root {
+  /* --- Color (cool, considered — a studio/blueprint feel) --- */
+  --bg:        #f1f3f0;   /* page background — cool pale paper */
+  --bg-panel:  #e7eae5;   /* recessed panels (résumé, contact) */
+  --ink:       #1b231f;   /* primary text — deep slate-green near-black */
+  --muted:     #565f58;   /* secondary text — AA on --bg */
+  --faint:     #5b6359;   /* labels, meta — AA: ~5.3:1 on --bg */
+  --line:      #d6dbd2;   /* hairlines */
+  --accent:    #2c6b62;   /* deep teal — the single accent, used sparingly */
+
+  /* --- Type --- */
+  --serif: 'Ovo', Georgia, 'Times New Roman', serif;
+  --sans:  'Hanken Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --mono:  ui-monospace, 'SF Mono', 'Cascadia Code', Menlo, Consolas, monospace;
+
+  /* --- Layout --- */
+  --maxw: 1080px;   /* outer shell */
+  --readw: 680px;   /* comfortable reading column */
+  --pad: clamp(1.25rem, 5vw, 3rem);
+}
+
+/* --- Reset-ish --- */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; background: var(--bg); }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 1.125rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+img { display: block; max-width: 100%; }
+a { color: inherit; }
+
+/* --- Keyboard focus: visible ring on every interactive element --- */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* --- Skip link: hidden until focused --- */
+.skip-link {
+  position: absolute;
+  left: 0.75rem;
+  top: -3rem;
+  z-index: 50;
+  background: var(--ink);
+  color: var(--bg);
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.7rem 1.1rem;
+  border-radius: 2px;
+  text-decoration: none;
+  transition: top 0.2s ease;
+}
+.skip-link:focus { top: 0.75rem; }
+
+/* ===========================================================================
+   TOP NAV — slim, quiet, sticky
+   =========================================================================== */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: saturate(120%) blur(8px);
+  border-bottom: 1px solid var(--line);
+}
+.topbar__inner {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0.85rem var(--pad);
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.topbar__name {
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.topbar__nav {
+  display: flex;
+  gap: clamp(0.9rem, 2.5vw, 1.8rem);
+  font-family: var(--mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.topbar__nav a {
+  color: var(--muted);
+  text-decoration: none;
+  padding-bottom: 2px;
+  border-bottom: 1px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.topbar__nav a:hover { color: var(--ink); border-color: var(--accent); }
+
+/* ===========================================================================
+   HERO — the thesis. Positioning statement carries the page.
+   =========================================================================== */
+.hero {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: clamp(3rem, 9vw, 6rem) var(--pad) clamp(2.5rem, 6vw, 4rem);
+}
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 0.74rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 1.6rem;
+}
+.hero__name {
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--faint);
+  margin: 0 0 1.4rem;
+}
+.hero__lead {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(1.9rem, 4.6vw, 3.2rem);
+  line-height: 1.18;
+  letter-spacing: -0.01em;
+  margin: 0 0 1.6rem;
+  max-width: 18ch;
+}
+.hero__lead .hl { color: var(--accent); }
+.hero__sub {
+  font-size: clamp(1.1rem, 2.2vw, 1.35rem);
+  line-height: 1.5;
+  color: var(--muted);
+  max-width: 46ch;
+  margin: 0 0 2.2rem;
+}
+.hero__sub .junction { font-style: italic; }
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1.4rem;
+}
+.hero__status {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  color: var(--faint);
+  margin: 0;
+}
+.hero__status::before {
+  content: "";
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  margin-right: 0.55rem;
+  border-radius: 50%;
+  background: var(--accent);
+  vertical-align: middle;
+}
+
+/* ===========================================================================
+   BUTTONS
+   =========================================================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  white-space: nowrap;
+  padding: 0.8rem 1.4rem;
+  border-radius: 2px;
+  text-decoration: none;
+  border: 1px solid var(--ink);
+  min-height: 44px;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.1s ease;
+}
+.btn--sm { padding: 0.6rem 1rem; font-size: 0.78rem; min-height: 0; }
+.btn--solid { background: var(--ink); color: var(--bg); }
+.btn--solid:hover { background: var(--accent); border-color: var(--accent); }
+.btn--ghost { background: transparent; color: var(--ink); }
+.btn--ghost:hover { background: var(--ink); color: var(--bg); }
+.btn:active { transform: translateY(1px); }
+
+/* ===========================================================================
+   SECTIONS — label column + body column (single column on mobile)
+   =========================================================================== */
+.section {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: clamp(2.5rem, 6vw, 4.5rem) var(--pad);
+  border-top: 1px solid var(--line);
+  display: grid;
+  gap: clamp(1.25rem, 4vw, 2.5rem);
+  grid-template-columns: 180px 1fr;
+}
+.section__label {
+  font-family: var(--mono);
+  font-size: 0.74rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--faint);
+  margin: 0.4rem 0 0;
+}
+.section__body { max-width: var(--readw); }
+.section--wide .section__body { max-width: none; }
+
+.prose p { margin: 0 0 1.2rem; }
+.prose p:last-child { margin-bottom: 0; }
+.prose a {
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--accent);
+  padding-bottom: 1px;
+  transition: color 0.2s ease;
+}
+.prose a:hover { color: var(--accent); }
+
+/* ===========================================================================
+   APPROACH — the signature. A real three-step sequence; numbering earns
+   its place here. Mono numerals, serif titles, accent tick.
+   =========================================================================== */
+.approach {
+  display: grid;
+  gap: clamp(1.5rem, 3vw, 2rem);
+  grid-template-columns: repeat(3, 1fr);
+  counter-reset: step;
+}
+.step {
+  position: relative;
+  padding-top: 1.6rem;
+  border-top: 2px solid var(--ink);
+}
+.step__num {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  margin: 0 0 0.9rem;
+}
+.step__title {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 1.55rem;
+  line-height: 1.1;
+  margin: 0 0 0.7rem;
+}
+.step__body {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+/* ===========================================================================
+   WORK — featured proof object + supporting set
+   =========================================================================== */
+.work__list { display: grid; gap: 1.5rem; }
+
+.work {
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  background: var(--bg);
+  padding: clamp(1.4rem, 3vw, 2rem);
+  transition: border-color 0.2s ease, transform 0.15s ease;
+}
+.work:hover { border-color: color-mix(in srgb, var(--accent) 45%, var(--line)); }
+
+.work--featured {
+  background: var(--bg-panel);
+  border-left: 3px solid var(--accent);
+}
+.work__kicker {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 0.7rem;
+}
+.work__title {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  line-height: 1.12;
+  margin: 0 0 0.4rem;
+}
+.work__title a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid var(--accent);
+  transition: color 0.2s ease;
+}
+.work__title a:hover { color: var(--accent); }
+.work__meta {
+  font-family: var(--mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.04em;
+  color: var(--faint);
+  margin: 0 0 1rem;
+}
+.work__body {
+  margin: 0;
+  font-size: 1.02rem;
+  line-height: 1.6;
+  color: var(--muted);
+}
+.work__body + .work__body { margin-top: 0.8rem; }
+.work--featured .work__title { font-size: clamp(1.7rem, 3.4vw, 2.3rem); }
+
+/* The three supporting items sit in a responsive two-up grid below the feature */
+.work__grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(2, 1fr);
+}
+.work__grid .work:last-child:nth-child(odd) { grid-column: 1 / -1; }
+
+/* ===========================================================================
+   RÉSUMÉ
+   =========================================================================== */
+.resume__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.resume__note {
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin: 0;
+}
+.resume__frame {
+  border: 1px solid var(--line);
+  background: var(--bg-panel);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.resume__pdf {
+  display: block;
+  width: 100%;
+  height: 70vh;
+  min-height: 520px;
+  border: 0;
+}
+.resume__fallback {
+  display: none; /* desktop shows the iframe; mobile swaps to this */
+  min-height: 360px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  padding: 3rem 1.5rem;
+  text-align: center;
+}
+.resume__fallback p {
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  color: var(--muted);
+  margin: 0;
+}
+.resume__hint {
+  margin: 0.9rem 0 0;
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+.resume__hint a {
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--line);
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+.resume__hint a:hover { color: var(--accent); border-color: var(--accent); }
+
+/* ===========================================================================
+   CONTACT
+   =========================================================================== */
+.contact { margin: 0; }
+.contact__row {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 1rem;
+  padding: 0.9rem 0;
+  border-bottom: 1px solid var(--line);
+}
+.contact__row:last-child { border-bottom: none; }
+.contact dt {
+  font-family: var(--mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--faint);
+  padding-top: 0.15rem;
+}
+.contact dd {
+  margin: 0;
+  font-size: 1.1rem;
+  overflow-wrap: anywhere;
+}
+.contact a {
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 1px;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+.contact a:hover { color: var(--accent); border-color: var(--accent); }
+
+.contact-form__honeypot {
+  position: absolute;
+  left: -9999px;
+  visibility: hidden;
+}
+.contact-form {
+  margin-top: 2.5rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid var(--line);
+  display: grid;
+  gap: 1.25rem;
+}
+/* grid above overrides the UA [hidden] rule, so hiding on submit needs this */
+.contact-form[hidden] { display: none; }
+.contact-form__row { display: grid; gap: 0.45rem; }
+.contact-form label {
+  font-family: var(--mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  line-height: 1.5;
+  color: var(--ink);
+  background: var(--bg-panel);
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  padding: 0.7rem 0.85rem;
+  transition: border-color 0.2s ease, background 0.2s ease;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.contact-form textarea { resize: vertical; min-height: 8rem; }
+.contact-form input::placeholder,
+.contact-form textarea::placeholder { color: var(--muted); }
+.contact-form input:hover,
+.contact-form textarea:hover { border-color: #c4cabe; }
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  background: var(--bg);
+}
+.contact-form button[type="submit"] {
+  justify-self: start;
+  margin-top: 0.25rem;
+  cursor: pointer;
+}
+.contact-form button[type="submit"]:disabled { opacity: 0.6; cursor: default; }
+
+.contact-form__success {
+  margin-top: 2.5rem;
+  padding: 2rem 1.75rem;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--accent);
+  background: var(--bg-panel);
+  border-radius: 2px;
+}
+.contact-form__success[hidden] { display: none; }
+.contact-form__success:focus { outline: none; }
+.contact-form__success h3 {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 1.4rem;
+  margin: 0 0 0.4rem;
+}
+.contact-form__success p {
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  color: var(--muted);
+  margin: 0;
+}
+
+/* ===========================================================================
+   FOOTER
+   =========================================================================== */
+.footer {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 2rem var(--pad) 3rem;
+  border-top: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.04em;
+  color: var(--faint);
+}
+.footer span, .footer__top { white-space: nowrap; }
+.footer__top { color: var(--muted); text-decoration: none; transition: color 0.2s ease; }
+.footer__top:hover { color: var(--accent); }
+
+/* ===========================================================================
+   REVEAL — one-time gentle fade-up on load. Gated on html.js.
+   =========================================================================== */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: none; }
+}
+.js .reveal { opacity: 0; animation: fadeUp 0.7s ease both; }
+.js .section.reveal { animation-delay: 0.05s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .js .reveal { opacity: 1; animation: none; }
+  html { scroll-behavior: auto; }
+}
+
+/* ===========================================================================
+   RESPONSIVE
+   =========================================================================== */
+@media (max-width: 760px) {
+  body { font-size: 1.06rem; }
+
+  .section { grid-template-columns: 1fr; gap: 1rem; }
+
+  /* Approach stacks; the sequence reads top-to-bottom, still numbered */
+  .approach { grid-template-columns: 1fr; gap: 1.75rem; }
+
+  .work__grid { grid-template-columns: 1fr; }
+
+  .topbar__nav { gap: 0.95rem; }
+  .contact__row { grid-template-columns: 1fr; gap: 0.2rem; }
+
+  /* Embedded PDF viewers are unreliable on mobile — show a tap-through panel */
+  .resume__pdf { display: none; }
+  .resume__fallback { display: flex; }
+}
+
+@media (max-width: 460px) {
+  .topbar__name { display: none; }
+  .topbar__inner { justify-content: center; }
+  .topbar__nav { flex-wrap: wrap; justify-content: center; gap: 0.75rem 1.1rem; }
+}

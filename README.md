@@ -1,3 +1,0 @@
-# stephenpeasley.com
-
-A website.
