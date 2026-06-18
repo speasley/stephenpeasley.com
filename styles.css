@@ -4,13 +4,13 @@
 
 :root {
   /* --- Color (cool, considered — a studio/blueprint feel) --- */
-  --bg:        #f1f3f0;   /* page background — cool pale paper */
-  --bg-panel:  #e7eae5;   /* recessed panels (résumé, contact) */
-  --ink:       #1b231f;   /* primary text — deep slate-green near-black */
-  --muted:     #565f58;   /* secondary text — AA on --bg */
-  --faint:     #5b6359;   /* labels, meta — AA: ~5.3:1 on --bg */
+  --bg:        #f1f3f0;   /* page background */
+  --bg-panel:  #e7eae5;   /* recessed panels */
+  --ink:       #1b231f;   /* primary text */
+  --muted:     #565f58;   /* secondary text */
+  --faint:     #5b6359;   /* labels, meta */
   --line:      #d6dbd2;   /* hairlines */
-  --accent:    #2c6b62;   /* deep teal — the single accent, used sparingly */
+  --accent:    #2b557d;   /* steel blue */
 
   /* --- Type --- */
   --serif: 'Ovo', Georgia, 'Times New Roman', serif;
@@ -18,12 +18,12 @@
   --mono:  ui-monospace, 'SF Mono', 'Cascadia Code', Menlo, Consolas, monospace;
 
   /* --- Layout --- */
-  --maxw: 1080px;   /* outer shell */
-  --readw: 680px;   /* comfortable reading column */
+  --maxw: 1080px;
+  --readw: 680px;
   --pad: clamp(1.25rem, 5vw, 3rem);
 }
 
-/* --- Reset-ish --- */
+/* --- Reset --- */
 *, *::before, *::after { box-sizing: border-box; }
 html { scroll-behavior: smooth; background: var(--bg); }
 body {
@@ -39,14 +39,14 @@ body {
 img { display: block; max-width: 100%; }
 a { color: inherit; }
 
-/* --- Keyboard focus: visible ring on every interactive element --- */
+/* --- Keyboard focus --- */
 :focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
   border-radius: 2px;
 }
 
-/* --- Skip link: hidden until focused --- */
+/* --- Skip link --- */
 .skip-link {
   position: absolute;
   left: 0.75rem;
@@ -65,7 +65,7 @@ a { color: inherit; }
 .skip-link:focus { top: 0.75rem; }
 
 /* ===========================================================================
-   TOP NAV — slim, quiet, sticky
+   TOP NAV 
    =========================================================================== */
 .topbar {
   position: sticky;
@@ -110,7 +110,7 @@ a { color: inherit; }
 .topbar__nav a:hover { color: var(--ink); border-color: var(--accent); }
 
 /* ===========================================================================
-   HERO — the thesis. Positioning statement carries the page.
+   HERO
    =========================================================================== */
 .hero {
   max-width: var(--maxw);
@@ -144,7 +144,6 @@ a { color: inherit; }
   margin: 0 0 1.6rem;
   max-width: 18ch;
 }
-.hero__lead .hl { color: var(--accent); }
 .hero__sub {
   font-size: clamp(1.1rem, 2.2vw, 1.35rem);
   line-height: 1.5;
@@ -158,23 +157,6 @@ a { color: inherit; }
   flex-wrap: wrap;
   gap: 0.75rem;
   margin-bottom: 1.4rem;
-}
-.hero__status {
-  font-family: var(--mono);
-  font-size: 0.78rem;
-  letter-spacing: 0.02em;
-  color: var(--faint);
-  margin: 0;
-}
-.hero__status::before {
-  content: "";
-  display: inline-block;
-  width: 7px;
-  height: 7px;
-  margin-right: 0.55rem;
-  border-radius: 50%;
-  background: var(--accent);
-  vertical-align: middle;
 }
 
 /* ===========================================================================
@@ -205,7 +187,7 @@ a { color: inherit; }
 .btn:active { transform: translateY(1px); }
 
 /* ===========================================================================
-   SECTIONS — label column + body column (single column on mobile)
+   SECTIONS
    =========================================================================== */
 .section {
   max-width: var(--maxw);
@@ -240,8 +222,7 @@ a { color: inherit; }
 .prose a:hover { color: var(--accent); }
 
 /* ===========================================================================
-   APPROACH — the signature. A real three-step sequence; numbering earns
-   its place here. Mono numerals, serif titles, accent tick.
+   APPROACH 
    =========================================================================== */
 .approach {
   display: grid;
@@ -276,7 +257,7 @@ a { color: inherit; }
 }
 
 /* ===========================================================================
-   WORK — featured proof object + supporting set
+   WORK
    =========================================================================== */
 .work__list { display: grid; gap: 1.5rem; }
 
@@ -338,66 +319,6 @@ a { color: inherit; }
   grid-template-columns: repeat(2, 1fr);
 }
 .work__grid .work:last-child:nth-child(odd) { grid-column: 1 / -1; }
-
-/* ===========================================================================
-   RÉSUMÉ
-   =========================================================================== */
-.resume__head {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
-}
-.resume__note {
-  font-family: var(--sans);
-  font-size: 0.9rem;
-  color: var(--muted);
-  margin: 0;
-}
-.resume__frame {
-  border: 1px solid var(--line);
-  background: var(--bg-panel);
-  border-radius: 2px;
-  overflow: hidden;
-}
-.resume__pdf {
-  display: block;
-  width: 100%;
-  height: 70vh;
-  min-height: 520px;
-  border: 0;
-}
-.resume__fallback {
-  display: none; /* desktop shows the iframe; mobile swaps to this */
-  min-height: 360px;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 1.25rem;
-  padding: 3rem 1.5rem;
-  text-align: center;
-}
-.resume__fallback p {
-  font-family: var(--sans);
-  font-size: 0.95rem;
-  color: var(--muted);
-  margin: 0;
-}
-.resume__hint {
-  margin: 0.9rem 0 0;
-  font-family: var(--sans);
-  font-size: 0.85rem;
-  color: var(--muted);
-}
-.resume__hint a {
-  color: var(--ink);
-  text-decoration: none;
-  border-bottom: 1px solid var(--line);
-  transition: border-color 0.2s ease, color 0.2s ease;
-}
-.resume__hint a:hover { color: var(--accent); border-color: var(--accent); }
 
 /* ===========================================================================
    CONTACT
@@ -536,7 +457,7 @@ a { color: inherit; }
 .footer__top { color: var(--muted); text-decoration: none; transition: color 0.2s ease; }
 .footer__top:hover { color: var(--accent); }
 
-/* --- Brain: a quiet end-of-page note. Click or Enter to unfold the dates. --- */
+/* --- Brain --- */
 .footer__egg {
   position: relative;
   display: flex;
@@ -606,7 +527,7 @@ a { color: inherit; }
 }
 
 /* ===========================================================================
-   REVEAL — one-time gentle fade-up on load. Gated on html.js.
+   REVEAL
    =========================================================================== */
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(12px); }
@@ -628,7 +549,6 @@ a { color: inherit; }
 
   .section { grid-template-columns: 1fr; gap: 1rem; }
 
-  /* Approach stacks; the sequence reads top-to-bottom, still numbered */
   .approach { grid-template-columns: 1fr; gap: 1.75rem; }
 
   .work__grid { grid-template-columns: 1fr; }
@@ -636,9 +556,6 @@ a { color: inherit; }
   .topbar__nav { gap: 0.95rem; }
   .contact__row { grid-template-columns: 1fr; gap: 0.2rem; }
 
-  /* Embedded PDF viewers are unreliable on mobile — show a tap-through panel */
-  .resume__pdf { display: none; }
-  .resume__fallback { display: flex; }
 }
 
 @media (max-width: 460px) {
