@@ -155,7 +155,6 @@ a { color: inherit; }
   max-width: 46ch;
   margin: 0 0 2.2rem;
 }
-.hero__sub .junction { font-style: italic; }
 .hero__actions {
   display: flex;
   flex-wrap: wrap;
