@@ -13,9 +13,8 @@
   --accent:    #2b557d;   /* steel blue */
 
   /* --- Type --- */
-  --serif: 'Ovo', Georgia, 'Times New Roman', serif;
-  --sans:  'Hanken Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --mono:  ui-monospace, 'SF Mono', 'Cascadia Code', Menlo, Consolas, monospace;
+  --serif: 'IBM Plex Serif', Georgia, 'Times New Roman', serif;
+  --sans:  'Archivo', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 
   /* --- Layout --- */
   --maxw: 1080px;
@@ -50,68 +49,41 @@ a { color: inherit; }
   border-radius: 2px;
 }
 
-/* --- Skip link --- */
-.skip-link {
-  position: absolute;
-  left: 0.75rem;
-  top: -3rem;
-  z-index: 50;
-  background: var(--ink);
-  color: var(--bg);
-  font-family: var(--sans);
-  font-size: 0.85rem;
-  font-weight: 600;
-  padding: 0.7rem 1.1rem;
-  border-radius: 2px;
-  text-decoration: none;
-  transition: top 0.2s ease;
-}
-.skip-link:focus { top: 0.75rem; }
-
 /* ===========================================================================
-   TOP NAV 
+   MASTHEAD
    =========================================================================== */
-.topbar {
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  background: color-mix(in srgb, var(--bg) 88%, transparent);
-  backdrop-filter: saturate(120%) blur(8px);
-  border-bottom: 1px solid var(--line);
-}
-.topbar__inner {
+.masthead__inner {
   max-width: var(--maxw);
   margin: 0 auto;
   padding: 0.85rem var(--pad);
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
   gap: 1rem;
 }
-.topbar__name {
+.masthead__logo {
+  display: block;
+  color: var(--ink);
+  text-decoration: none;
+  line-height: 0;
+}
+.masthead__logo svg {
+  display: block;
+  width: auto;
+  height: 2.5rem;
+}
+.masthead__tagline {
   font-family: var(--sans);
-  font-weight: 600;
-  font-size: 0.95rem;
-  letter-spacing: 0.02em;
-  text-decoration: none;
-  white-space: nowrap;
-}
-.topbar__nav {
-  display: flex;
-  gap: clamp(0.9rem, 2.5vw, 1.8rem);
-  font-family: var(--mono);
-  font-size: 0.74rem;
-  letter-spacing: 0.04em;
+  font-weight: 500;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
+  line-height: 1.35;
+  color: var(--faint);
+  text-align: right;
+  text-wrap: balance;
+  margin: 0;
 }
-.topbar__nav a {
-  color: var(--muted);
-  text-decoration: none;
-  padding-bottom: 2px;
-  border-bottom: 1px solid transparent;
-  transition: color 0.2s ease, border-color 0.2s ease;
-}
-.topbar__nav a:hover { color: var(--ink); border-color: var(--accent); }
 
 /* ===========================================================================
    HERO
@@ -119,29 +91,11 @@ a { color: inherit; }
 .hero {
   max-width: var(--maxw);
   margin: 0 auto;
-  padding: clamp(3rem, 9vw, 6rem) var(--pad) clamp(2.5rem, 6vw, 4rem);
-}
-.eyebrow {
-  font-family: var(--mono);
-  font-size: 0.74rem;
-  font-weight: 400;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin: 0 0 1.6rem;
-}
-.hero__name {
-  font-family: var(--sans);
-  font-weight: 600;
-  font-size: 0.95rem;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: var(--faint);
-  margin: 0 0 1.4rem;
+  padding: clamp(1.5rem, 4.5vw, 3rem) var(--pad) clamp(2.5rem, 6vw, 4rem);
 }
 .hero__lead {
   font-family: var(--serif);
-  font-weight: 400;
+  font-weight: 600;
   font-size: clamp(1.9rem, 4.6vw, 3.2rem);
   line-height: 1.18;
   letter-spacing: -0.01em;
@@ -175,14 +129,19 @@ a { color: inherit; }
   letter-spacing: 0.04em;
   line-height: 1;
   white-space: nowrap;
+  gap: 0.55em;
   padding: 0.8rem 1.4rem;
-  border-radius: 2px;
+  border-radius: 8px;
   text-decoration: none;
   border: 1px solid var(--ink);
   min-height: 44px;
   transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.1s ease;
 }
-.btn--sm { padding: 0.6rem 1rem; font-size: 0.78rem; min-height: 0; }
+.btn__icon {
+  width: 1.15em;
+  height: 1.15em;
+  flex: none;
+}
 .btn--solid { background: var(--ink); color: var(--bg); }
 .btn--solid:hover { background: var(--accent); border-color: var(--accent); }
 .btn--ghost { background: transparent; color: var(--ink); }
@@ -197,18 +156,15 @@ a { color: inherit; }
   margin: 0 auto;
   padding: clamp(2.5rem, 6vw, 4.5rem) var(--pad);
   border-top: 1px solid var(--line);
-  display: grid;
-  gap: clamp(1.25rem, 4vw, 2.5rem);
-  grid-template-columns: 180px 1fr;
 }
 .section__label {
-  font-family: var(--mono);
-  font-size: 0.74rem;
-  font-weight: 400;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--faint);
-  margin: 0.4rem 0 0;
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: clamp(1.65rem, 3.6vw, 2.4rem);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin: 0 0 clamp(1rem, 2.2vw, 1.5rem);
 }
 .section__body { max-width: var(--readw); }
 .section--wide .section__body { max-width: none; }
@@ -238,16 +194,9 @@ a { color: inherit; }
   padding-top: 1.6rem;
   border-top: 2px solid var(--ink);
 }
-.step__num {
-  font-family: var(--mono);
-  font-size: 0.78rem;
-  letter-spacing: 0.08em;
-  color: var(--accent);
-  margin: 0 0 0.9rem;
-}
 .step__title {
   font-family: var(--serif);
-  font-weight: 400;
+  font-weight: 600;
   font-size: 1.55rem;
   line-height: 1.1;
   margin: 0 0 0.7rem;
@@ -277,17 +226,9 @@ a { color: inherit; }
   background: var(--bg-panel);
   border-left: 3px solid var(--accent);
 }
-.work__kicker {
-  font-family: var(--mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin: 0 0 0.7rem;
-}
 .work__title {
   font-family: var(--serif);
-  font-weight: 400;
+  font-weight: 600;
   font-size: clamp(1.5rem, 3vw, 2rem);
   line-height: 1.12;
   margin: 0 0 0.4rem;
@@ -300,8 +241,9 @@ a { color: inherit; }
 }
 .work__title a:hover { color: var(--accent); }
 .work__meta {
-  font-family: var(--mono);
-  font-size: 0.74rem;
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: 1rem;
   letter-spacing: 0.04em;
   color: var(--faint);
   margin: 0 0 1rem;
@@ -336,7 +278,8 @@ a { color: inherit; }
 }
 .contact__row:last-child { border-bottom: none; }
 .contact dt {
-  font-family: var(--mono);
+  font-family: var(--sans);
+  font-weight: 500;
   font-size: 0.74rem;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -373,7 +316,8 @@ a { color: inherit; }
 .contact-form[hidden] { display: none; }
 .contact-form__row { display: grid; gap: 0.45rem; }
 .contact-form label {
-  font-family: var(--mono);
+  font-family: var(--sans);
+  font-weight: 500;
   font-size: 0.74rem;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -424,7 +368,7 @@ a { color: inherit; }
 .contact-form__success:focus { outline: none; }
 .contact-form__success h3 {
   font-family: var(--serif);
-  font-weight: 500;
+  font-weight: 600;
   font-size: 1.4rem;
   margin: 0 0 0.4rem;
 }
@@ -451,7 +395,8 @@ a { color: inherit; }
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-family: var(--mono);
+  font-family: var(--sans);
+  font-weight: 500;
   font-size: 0.74rem;
   letter-spacing: 0.04em;
   color: var(--faint);
@@ -510,7 +455,8 @@ a { color: inherit; }
 .footer__egg.is-open .egg__info { opacity: 1; transform: translate(0, -50%); }
 
 .egg__heading {
-  font-family: var(--mono);
+  font-family: var(--sans);
+  font-weight: 600;
   font-size: 0.66rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -550,19 +496,15 @@ a { color: inherit; }
 @media (max-width: 760px) {
   body { font-size: 1.06rem; }
 
-  .section { grid-template-columns: 1fr; gap: 1rem; }
-
   .approach { grid-template-columns: 1fr; gap: 1.75rem; }
 
   .work__grid { grid-template-columns: 1fr; }
 
-  .topbar__nav { gap: 0.95rem; }
   .contact__row { grid-template-columns: 1fr; gap: 0.2rem; }
 
 }
 
 @media (max-width: 460px) {
-  .topbar__name { display: none; }
-  .topbar__inner { justify-content: center; }
-  .topbar__nav { flex-wrap: wrap; justify-content: center; gap: 0.75rem 1.1rem; }
+  .masthead__logo svg { height: 2rem; }
+  .masthead__tagline { font-size: 0.66rem; letter-spacing: 0.05em; }
 }
