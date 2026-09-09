@@ -80,6 +80,10 @@ a { color: inherit; }
   height: 2.5rem;
 }
 .masthead__tagline {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.6em;
   font-family: var(--sans);
   font-weight: 500;
   font-size: 0.72rem;
@@ -90,6 +94,11 @@ a { color: inherit; }
   text-align: right;
   text-wrap: balance;
   margin: 0;
+}
+.masthead__tagline-icon {
+  width: 1.6em;
+  height: 1.6em;
+  flex: none;
 }
 
 /* ===========================================================================
