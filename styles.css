@@ -4,13 +4,15 @@
 
 :root {
   /* --- Color (cool, considered — a studio/blueprint feel) --- */
-  --bg:        #f1f3f0;   /* page background */
-  --bg-panel:  #e7eae5;   /* recessed panels */
-  --ink:       #1b231f;   /* primary text */
-  --muted:     #565f58;   /* secondary text */
-  --faint:     #5b6359;   /* labels, meta */
-  --line:      #d6dbd2;   /* hairlines */
-  --accent:    #2b557d;   /* steel blue */
+  --bg:        #2E4057;   /* gradient bottom, solid fallback */
+  --bg-top:    #036F86;   /* gradient top */
+  --bg-panel:  rgba(255, 255, 255, 0.10);  /* raised panels */
+  --panel-soft: rgba(255, 255, 255, 0.05); /* cards */
+  --ink:       #ffffff;   /* primary text */
+  --muted:     rgba(255, 255, 255, 0.82);  /* secondary text */
+  --faint:     rgba(255, 255, 255, 0.78);  /* labels, meta */
+  --line:      rgba(255, 255, 255, 0.22);  /* hairlines */
+  --accent:    #99C24D;   /* lime */
 
   /* --- Type --- */
   --serif: 'IBM Plex Serif', Georgia, 'Times New Roman', serif;
@@ -24,10 +26,15 @@
 
 /* --- Reset --- */
 *, *::before, *::after { box-sizing: border-box; }
-html { scroll-behavior: smooth; background: var(--bg); }
+html {
+  scroll-behavior: smooth;
+  min-height: 100%;
+  background: var(--bg);
+  background: linear-gradient(0deg, var(--bg) 0%, var(--bg-top) 100%);
+}
 body {
   margin: 0;
-  background: var(--bg);
+  background: transparent;
   color: var(--ink);
   font-family: var(--serif);
   font-size: 1.125rem;
@@ -216,7 +223,7 @@ a { color: inherit; }
 .work {
   border: 1px solid var(--line);
   border-radius: 2px;
-  background: var(--bg);
+  background: var(--panel-soft);
   padding: clamp(1.4rem, 3vw, 2rem);
   transition: border-color 0.2s ease, transform 0.15s ease;
 }
@@ -342,12 +349,12 @@ a { color: inherit; }
 .contact-form input::placeholder,
 .contact-form textarea::placeholder { color: var(--muted); }
 .contact-form input:hover,
-.contact-form textarea:hover { border-color: #c4cabe; }
+.contact-form textarea:hover { border-color: rgba(255, 255, 255, 0.42); }
 .contact-form input:focus,
 .contact-form textarea:focus {
   outline: none;
   border-color: var(--accent);
-  background: var(--bg);
+  background: var(--bg-panel);
 }
 .contact-form button[type="submit"] {
   justify-self: start;
