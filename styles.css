@@ -108,6 +108,7 @@ a { color: inherit; }
   max-width: var(--maxw);
   margin: 0 auto;
   padding: clamp(1.5rem, 4.5vw, 3rem) var(--pad) clamp(2.5rem, 6vw, 4rem);
+  text-align: center;
 }
 .hero__lead {
   font-family: var(--serif);
@@ -115,7 +116,7 @@ a { color: inherit; }
   font-size: clamp(1.9rem, 4.6vw, 3.2rem);
   line-height: 1.18;
   letter-spacing: -0.01em;
-  margin: 0 0 1.6rem;
+  margin: 0 auto 1.6rem;
   max-width: 18ch;
 }
 .hero__sub {
@@ -123,11 +124,12 @@ a { color: inherit; }
   line-height: 1.5;
   color: var(--muted);
   max-width: 46ch;
-  margin: 0 0 2.2rem;
+  margin: 0 auto 2.2rem;
 }
 .hero__actions {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 0.75rem;
   margin-bottom: 1.4rem;
 }
